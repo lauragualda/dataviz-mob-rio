@@ -42,7 +42,7 @@
   <header align="right" style=" margin-left: 60px;  font-size:12px; color:DimGray"> Visualização da Informação - FGV/EMAp</header>
   <header align="right" style="margin-left: 60px;  font-size:12px; color:DimGray"> Laura Sant'Anna</header>
 
-<h1 style="margin-top:50px; margin-right: -100px; width: 850px; height: 80px"> Deslocamentos na Região Metropolitana do Rio de Janeiro</h1>
+<h1 style="margin-top:30px; margin-right: -100px; width: 850px; height: 80px"> Deslocamentos na Região Metropolitana do Rio de Janeiro</h1>
 
 <aside style="margin-top:100px; margin-right: -280px; width: 250px; color:DimGray">
 
@@ -62,9 +62,7 @@
     <script src="js/mapper.js"></script>
     <section>
     <script>
-      //*******************************************************************
-      //  CREATE MATRIX AND MAP
-      //*******************************************************************
+     // cria a matriz e mapeia os chords
       queue()
         .defer(d3.json, 'matriz_regioes.json')
         .defer(d3.csv, 'regioes.csv')
@@ -73,9 +71,7 @@
           _.each(mmap, function (d, i) { d.id=i; d.data=d.color })
           drawChords(matrix, mmap);
         });
-      //*******************************************************************
-      //  DRAW THE CHORD DIAGRAM
-      //*******************************************************************
+      // desenha o chord diagram
       function drawChords (matrix, mmap) {
         var w = 980, h = 800, r1 = h / 2, r0 = r1 - 110;
 

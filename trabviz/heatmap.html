@@ -37,12 +37,12 @@ rect.highlight {
 
 </style>
 <div id="tooltip"></div>
-<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+<script src="lib/d3.js"></script>
 
   <header align="right" style=" margin-left: 60px;  font-size:12px; color:DimGray"> Visualização da Informação - FGV/EMAp</header>
   <header align="right" style="margin-left: 60px;  font-size:12px; color:DimGray"> Laura Sant'Anna</header>
 
-<h1 style="margin-top:50px; margin-right: 65px;">Deslocamentos na Região Metropolitana do Rio de Janeiro</h1>
+<h1 style="margin-top:30px; margin-right: 65px;">Deslocamentos na Região Metropolitana do Rio de Janeiro</h1>
 
 <aside style="margin-top:100px; margin-right: -300px; width: 250px; color:DimGray">
     <p>Modal:
@@ -112,7 +112,7 @@ rect.highlight {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")  
 
-        // Based on the user-selected input text above, make the appropriate api call and retrieve the json 
+        // baseado na seleção de modal, chama a base de dados
         d3.json(new_json, function(miserables) {
 
             console.log(new_json)
@@ -121,7 +121,7 @@ rect.highlight {
                 nodes = miserables.nodes,
                 n = nodes.length;
 
-            // Compute index per node.
+            // índices por node
             nodes.forEach(function(node, i) {
                 node.index = i;
                 node.count = 0;
@@ -134,17 +134,14 @@ rect.highlight {
                 });
             });
 
-            // Convert links to matrix; count character occurrences.
+            // converte os links em matriz e conta a ocorrência das viagens
             miserables.links.forEach(function(link) {
                 matrix[link.source][link.target].z += link.value;
-                //matrix[link.target][link.source].z += link.value;
-                //matrix[link.source][link.source].z += link.value;
-                //matrix[link.target][link.target].z += link.value;
                 nodes[link.source].count += link.value;
                 nodes[link.target].count += link.value;
             });
 
-            // Precompute the orders.
+            // funções para ordenamento escolhido
             var orders = {
                 name: d3.range(n).sort(function(a, b) {
                     return d3.ascending(nodes[a].name, nodes[b].name);
@@ -157,7 +154,7 @@ rect.highlight {
                 })
             };
 
-            // The default sort order.
+            // Tordem default: alfabética
             x.domain(orders.name);
 
             svg.append("rect")
@@ -238,7 +235,6 @@ rect.highlight {
                 });
                 d3.select("#tooltip")
                     .style("visibility", "visible")
-                    //.html(chordTip(rdr(d)))
                     .text(nodes[d.y].name + " → " + nodes[d.x].name + " : " + d.z)
                     .style("font-size", "12px")
                     .style("top", function () { return (d3.event.pageY - 100)+"px"})
@@ -296,13 +292,13 @@ rect.highlight {
     }
 
 
-    // set initial json selection
+    // determina base de dados inicial
     select_json("total.json");
 
-    // handle on click event
+    // o que acontece quando clica pra mudar
     d3.select('#selected_json').on('change', function() {
 
-            // erase old image
+            // apaga matriz antiga
             d3.select("svg").remove(); 
 
             var new_json = eval(d3.select(this).property('value'));
