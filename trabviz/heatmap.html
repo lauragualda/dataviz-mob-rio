@@ -1,9 +1,24 @@
 
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Deslocamentos na RMRJ</title>
+<title>Heatmap - Deslocamentos na RMRJ</title>
 <style>
 @import url(style.css);
+
+#tooltip {
+    color: white;
+    opacity: .9;
+    background: #333;
+    padding: 5px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 10;
+    visibility: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
 .background {
   fill: #eee;
 }
@@ -19,17 +34,20 @@ rect.highlight {
     stroke: crimson;
     stroke-width: 1;
 }
-</style>
 
+</style>
+<div id="tooltip"></div>
 <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
 
-
-<header>
-</header>
+  <header>
+  <aside style="margin-top:10px; margin-right: -300px;"> Visualização da Informação - FGV/EMAp 
+  <p> Aluna: Laura Sant'Anna </p>
+  </aside>
+  </header>
 
 <h1 style="margin-top:50px; margin-right: 65px;">Deslocamentos na Região Metropolitana do Rio de Janeiro</h1>
 
-<aside style="margin-top:100px; margin-right: -250px;">
+<aside style="margin-top:100px; margin-right: -300px; width: 250px;">
     <p>Modal:
         <select id="selected_json">
             <option value='"total.json"'>Todos os modais</option>
@@ -43,7 +61,7 @@ rect.highlight {
 
     <i>      </i>
 
-    Ordem:
+    <p>Ordem:&ensp;  
         <select id="order">
             <option value="name">por Nome</option>
             <option value="count">por Frequência</option>
@@ -53,12 +71,12 @@ rect.highlight {
 
 
         <center>    
-        <p align="justify">Esta visualização representa a matriz origem-destino na Região Metropolitana do Rio de Janeiro, Brasil. </p>
+        <p align="justify">Esta visualização representa a matriz origem-destino da Região Metropolitana do Rio de Janeiro, Brasil segundo dados do PDTU. </p>
 
             <p align="justify">Células coloridas indicam a ocorrência de viagens entre a região de origem (linha) e a região de destino (coluna) correspondentes. Quanto maior a luminância da cor, maior é a frequência de viagens. </p>
 
                 <p align="justify"> As cores são atribuídas de acordo com a zona da região de destino: </p>
-                <p> <img src="legenda.jpg" alt="legenda" width="180" height="105"></p>
+                <p> <img src="legenda.jpg" alt="legenda" width="250" height="150"></p>
         </center>
 
 </aside>
@@ -120,7 +138,7 @@ rect.highlight {
             // Convert links to matrix; count character occurrences.
             miserables.links.forEach(function(link) {
                 matrix[link.source][link.target].z += link.value;
-                matrix[link.target][link.source].z += link.value;
+                //matrix[link.target][link.source].z += link.value;
                 //matrix[link.source][link.source].z += link.value;
                 //matrix[link.target][link.target].z += link.value;
                 nodes[link.source].count += link.value;
@@ -211,16 +229,27 @@ rect.highlight {
                     .on("mouseout", mouseout);
             }
 
-            function mouseover(p) {
+            function mouseover(d, p) {
+                var p = d;
                 d3.selectAll(".row text").classed("active", function(d, i) {
                     return i == p.y;
                 });
                 d3.selectAll(".column text").classed("active", function(d, i) {
                     return i == p.x;
                 });
+                d3.select("#tooltip")
+                    .style("visibility", "visible")
+                    //.html(chordTip(rdr(d)))
+                    .text(nodes[d.y].name + " → " + nodes[d.x].name + " : " + d.z)
+                    .style("font-size", "12px")
+                    .style("top", function () { return (d3.event.pageY - 100)+"px"})
+                    .style("left", function () { return (d3.event.pageX - 100)+"px"});
+
+
             }
 
             function mouseout() {
+                d3.select("#tooltip").style("visibility", "hidden");
                 d3.selectAll("text").classed("active", false);
             }
 
@@ -266,6 +295,7 @@ rect.highlight {
 
 
     }
+
 
     // set initial json selection
     select_json("total.json");
