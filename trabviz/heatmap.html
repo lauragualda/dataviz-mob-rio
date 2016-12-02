@@ -39,15 +39,12 @@ rect.highlight {
 <div id="tooltip"></div>
 <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
 
-  <header>
-  <aside style="margin-top:10px; margin-right: -300px;"> Visualização da Informação - FGV/EMAp 
-  <p> Aluna: Laura Sant'Anna </p>
-  </aside>
-  </header>
+  <header align="right" style=" margin-left: 60px;  font-size:12px; color:DimGray"> Visualização da Informação - FGV/EMAp</header>
+  <header align="right" style="margin-left: 60px;  font-size:12px; color:DimGray"> Laura Sant'Anna</header>
 
 <h1 style="margin-top:50px; margin-right: 65px;">Deslocamentos na Região Metropolitana do Rio de Janeiro</h1>
 
-<aside style="margin-top:100px; margin-right: -300px; width: 250px;">
+<aside style="margin-top:100px; margin-right: -300px; width: 250px; color:DimGray">
     <p>Modal:
         <select id="selected_json">
             <option value='"total.json"'>Todos os modais</option>
@@ -73,10 +70,12 @@ rect.highlight {
         <center>    
         <p align="justify">Esta visualização representa a matriz origem-destino da Região Metropolitana do Rio de Janeiro, Brasil segundo dados do PDTU. </p>
 
-            <p align="justify">Células coloridas indicam a ocorrência de viagens entre a região de origem (linha) e a região de destino (coluna) correspondentes. Quanto maior a luminância da cor, maior é a frequência de viagens. </p>
+        <p align="justify">Células coloridas indicam a ocorrência de viagens entre a região de origem (linha) e a região de destino (coluna) correspondentes. Quanto maior a luminância da cor, maior é a frequência de viagens. </p>
 
-                <p align="justify"> As cores são atribuídas de acordo com a zona da região de destino: </p>
-                <p> <img src="legenda.jpg" alt="legenda" width="250" height="150"></p>
+        <p align="justify"> As cores são atribuídas de acordo com a zona da região de destino: </p>
+        <p> <img src="legenda.jpg" alt="legenda" width="250" height="150"></p>
+        
+        <p align="justify">Elaborado com <a href="http://d3js.org/">D3.js</a> usando como referência o exemplo de <a href="https://bost.ocks.org/mike/miserables/">Mike Bostock</a>. </aside>
         </center>
 
 </aside>
@@ -313,6 +312,4 @@ rect.highlight {
 
 </section>
 
-<footer>
-  <aside>Mestrado EMAp - Visualização da Informação</aside>
-</footer>
+<footer align="right" style="margin-left: 100px;  font-size:12px; color:DimGray">Dezembro, 2016</footer>
