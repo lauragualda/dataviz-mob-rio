@@ -1,13 +1,11 @@
 
 <!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <title>Heatmap - Deslocamentos na RMRJ</title>
-    <style>
-    @import url(style.css);
+<meta charset="utf-8">
+<title>Heatmap - Deslocamentos na RMRJ</title>
+<style>
+@import url(style.css);
 
-    #tooltip {
+#tooltip {
     color: white;
     opacity: .9;
     background: #333;
@@ -19,33 +17,30 @@
     visibility: hidden;
     white-space: nowrap;
     pointer-events: none;
-    }
+}
 
-    .background {
-      fill: #eee;
-    }
-    line svg{
-      stroke: #fff;
-    }
-    text.active {
-      fill: crimson;
-      font-size: 120%;
-    }
-    rect.highlight {
-        fill: none;
-        stroke: crimson;
-        stroke-width: 1;
-    }
+.background {
+  fill: #eee;
+}
+line svg{
+  stroke: #fff;
+}
+text.active {
+  fill: crimson;
+  font-size: 120%;
+}
+rect.highlight {
+    fill: none;
+    stroke: crimson;
+    stroke-width: 1;
+}
 
-    </style>
+</style>
+<div id="tooltip"></div>
+<script src="lib/d3.js"></script>
 
-    <div id="tooltip"></div>
-    <script src="lib/d3.js"></script>
-
-    </head>
-
-  <header style=" margin-left: 1055px;  font-size:12px; color:DimGray"> Visualização da Informação - FGV/EMAp</header>
-  <header style="margin-left: 1175px;  font-size:12px; color:DimGray"> Laura Sant'Anna</header>
+  <header style=" margin-left: 60px;  font-size:12px; color:DimGray"> Visualização da Informação - FGV/EMAp</header>
+  <header style="margin-left: 60px;  font-size:12px; color:DimGray"> Laura Sant'Anna</header>
 
 <h1 style="margin-top:30px; margin-right: -200px; width: 900px; height: 80px"> Deslocamentos na Região Metropolitana do Rio de Janeiro</h1>
 
@@ -314,4 +309,3 @@
 </section>
 
 <footer align="right" style="margin-left: 100px;  font-size:12px; color:DimGray">Dezembro, 2016</footer>
-</html>
